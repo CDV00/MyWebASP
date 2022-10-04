@@ -1,0 +1,48 @@
+﻿@model CaoDinhVu.Context.Order
+@{
+    ViewBag.Title = "_InfoDHTC";
+    Layout = "~/Views/Shared/_layoutSite.cshtml";
+}
+
+
+<div class="col-md-12 my-3">
+    <h5>Thông tin của bạn</h5>
+
+    <div class="row mt-3 my-2">
+        <div class="col-2">Tên Người nhận:</div>
+        <div class="col-10">@Model.DeliveryName</div>
+    </div>
+    <div class="row my-2">
+        <div class="col-2">Số Điện Thoại:</div>
+        <div class="col-10">@Model.DeliveryPhone</div>
+    </div>
+    <div class="row my-2">
+        <div class="col-2">Địa chỉ nhận hàng:</div>
+        <div class="col-10">@Model.DeliveryAddress</div>
+    </div>
+    <div class="row my-2">
+        <div class="col-2">Thời gian nhận hàng:</div>
+        <div class="col-10">@Model.ExportDate</div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-2">
+            Hình thức giao hàng:
+        </div>
+        <div class="col-10">
+            Giao hàng tận nhà.
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-2">
+            Hình thức thanh toán:
+        </div>
+        <div class="col-10">
+            Thanh toán khi nhận hàng.
+        </div>
+    </div>
+
+
+</div>
+
+

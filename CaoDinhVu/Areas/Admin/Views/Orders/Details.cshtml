@@ -1,0 +1,113 @@
+﻿@model CaoDinhVu.Context.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<h2>Chi tiet</h2>
+
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Chi tiết sản phẩm</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div>
+                <h4>Order</h4>
+                <hr />
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryPhone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryPhone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryEmail)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryEmail)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ExportDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ExportDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryAddress)
+                    </dd>
+
+
+
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+                    @{
+                        if (Model.Status == 1)
+                        {
+                            <dd>Đang Giao</dd>
+                        }
+                        else
+                        {
+                            if (Model.Status == 2)
+                            {
+                                <dd>Chờ xác nhận</dd>
+                            }
+                            else
+                            {
+                                <dd>Đã giao</dd>
+                            }
+                        }
+
+
+                    }
+
+                </dl>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layoutSite.cshtml";
+}
+<script>
+    @*<!--$(document).ready(function () {
+
+        $('#CartCount').text("0");
+        console.log(@(Session["count"].ToString()));
+
+    });
+    $(window).on("load", function () {
+        console.log("window loaded");
+    });-->*@
+    @*$(document).ready(function () {
+        @Session["count"] = 0;
+        $('#CartCount').text(@Session["count"]);
+
+    });*@
+    $(document).ready(function () {
+        
+        $.ajax({
+            url: '/Cart/DeleteAll',
+            dataType: 'json',
+            type: 'POST',
+
+        });
+        $('#CartCount').text("0");
+    });
+
+</script>
+<div class='border-0 text-center mt-4'>
+    <h3>Bạn đã đặt hàng thành công vui lòng chờ Admin xác nhận!</h3>
+    <br />
+    <a href='/' class='btn btn-primary'>tiếp tục mua hàng</a>
+</div>

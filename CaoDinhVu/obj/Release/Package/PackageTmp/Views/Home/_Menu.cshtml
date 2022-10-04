@@ -1,0 +1,44 @@
+﻿@model CaoDinhVu.Models.HomeModel
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="~/">Trang chủ</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="~/danh-muc"> Danh mục </a>
+        <div class="dropdown-menu dropdown-large">
+            <nav class="row">
+                <div class="col-6">
+                    <a href="~/Category/index">Tất cả danh mục</a>
+                    @foreach (var item in Model.ListCategories)
+                    {
+                        <a href="~/danh-muc/@item.Slug">@item.Name</a>
+                    }
+
+
+                </div>
+
+            </nav> <!--  row end .// -->
+        </div> <!--  dropdown-menu dropdown-large end.// -->
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="~/thuong-hieu"> Thương hiệu </a>
+        <div class="dropdown-menu dropdown-large">
+            <nav class="row">
+                <div class="col-6">
+                    <a href="~/brand/index">Tất cả thương hiệu</a>
+                    @foreach (var item in Model.ListCategories)
+                    {
+                        <a href="~/thuong-hieu/@item.Slug">@item.Name</a>
+                    }
+
+                </div>
+
+            </nav> <!--  row end .// -->
+        </div> <!--  dropdown-menu dropdown-large end.// -->
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="~/tat-ca-san-pham">Tất cả sản phẩm</a>
+    </li>
+
+</ul>

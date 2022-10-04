@@ -1,0 +1,110 @@
+﻿@model CaoDinhVu.Models.OrderModel
+@{
+    ViewBag.Title = "ProfileOrder";
+    Layout = "~/Views/Shared/_layoutSite.cshtml";
+}
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+    <div class="container">
+        <h2 class="title-page">My account</h2>
+    </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <aside class="col-md-3">
+                <nav class="list-group">
+                    <a class="list-group-item" href="~/account/ProfileMain"> Tổng quan  </a>
+                    <a class="list-group-item" href="~/account/ProfileAddress"> Địa chỉ </a>
+                    <a class="list-group-item active" href="~/account/ProfileOrder"> Đơn đặt hàng </a>
+                    <a class="list-group-item" href="~/account/ProfileSetting"> Cài đặt </a>
+                    <a class="list-group-item" href="~/dang-xuat"> Đăng Xuất </a>
+                </nav>
+            </aside> <!-- col.// -->
+            <main class="col-md-9">
+                @foreach (var item in Model.listOrders)
+                {
+                    <article class="card mb-4">
+                        <header class="card-header">
+                            @*<a href="#" class="float-right"> <i class="fa fa-print"></i> Print</a>*@
+                            @*<strong class="d-inline-block mr-3">Order ID: 6123456789</strong>*@
+                            <span>Ngày đặt hàng: @item.CreatedDate</span>
+                        </header>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h6 class="text-muted">Giao hàng đến</h6>
+                                    <p>
+                                        Tên: @item.DeliveryName <br>
+                                        Số điện thoại: @item.DeliveryPhone<br>
+                                        Email: @item.DeliveryEmail <br>
+                                        Địa chỉ: @item.DeliveryAddress <br>
+                                    </p>
+                                </div>
+                                @*<div class="col-md-4">
+                                    <h6 class="text-muted">Payment</h6>
+                                    <span class="text-success">
+                                        <i class="fab fa-lg fa-cc-visa"></i>
+                                        Visa  **** 4216
+                                    </span>
+                                    <p>
+                                        Subtotal: $356 <br>
+                                        Shipping fee:  $56 <br>
+                                        <span class="b">Total:  $456 </span>
+                                    </p>
+                                </div>*@
+                            </div> <!-- row.// -->
+                        </div> <!-- card-body .// -->
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <tbody>
+
+
+                                    @foreach (var itemDetail in Model.listOrderdetails.Where(od => od.OrderId == item.Id))
+                                    {
+                                        foreach (var itemProduct in Model.listProduct.Where(p => p.Id == itemDetail.ProductId))
+                                        {
+                                        <tr>
+                                            <td width="65">
+                                                <img src="~/Content/images/items/@itemProduct.Image" class="img-xs border">
+                                            </td>
+                                            <td>
+                                                <p class="title mb-0">@itemProduct.Name </p>
+                                                <var class="price text-muted">@Model.listProduct.Where(p => p.Id == itemDetail.ProductId).FirstOrDefault().Price</var>
+                                            </td>
+                                            <td> Thương hiệu <br> @Model.listBrand.Where(p => p.Id == itemProduct.SupplierId).FirstOrDefault().Name </td>
+                                            <td width="250">
+                                                <a href="#" class="btn btn-outline-primary">Track order</a>
+                                                <div class="dropdown d-inline-block">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-outline-secondary">More</a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a href="#" class="dropdown-item">Return</a>
+                                                        <a href="#" class="dropdown-item">Cancel order</a>
+                                                    </div>
+                                                </div> <!-- dropdown.// -->
+                                            </td>
+                                        </tr>
+                                        }
+                                        
+                                    }
+                                </tbody>
+                            </table>
+                        </div> <!-- table-responsive .end// -->
+                    </article> <!-- card order-item .// -->
+                }
+
+
+
+
+
+
+            </main> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->

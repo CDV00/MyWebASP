@@ -1,0 +1,96 @@
+﻿@model IEnumerable<CaoDinhVu.Context.Category>
+@{
+    ViewBag.Title = "Trash";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+@section header{
+    <link href="~/Public/Template/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Public/Template/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <strong class="text-danger text-uppercase">Thùng rác</strong>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <!--ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Blank Page</li>
+                    </ol-->
+                    <a href="@Url.Action("Index","Categories")" class="btn btn-info"><i class="fas fa-chevron-left"></i> Quay lại</a>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th>Tên danh Mục</th>
+                            <th>
+                                Trạng thái
+                            </th>
+                            <th>Change</th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Id)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkId" value="" />
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    Tạm ẩn
+                                </td>
+                                <td>
+
+                                    <a href="@Url.Action("ReTrash","Categories", new { id = item.Id })" class="btn btn-sm btn-info"><i class="fas fa-redo-alt"></i> Khôi phục</a>
+                                    <a href="@Url.Action("Delete","Categories", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-ban"></i> Xóa vĩnh viễn</a>
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

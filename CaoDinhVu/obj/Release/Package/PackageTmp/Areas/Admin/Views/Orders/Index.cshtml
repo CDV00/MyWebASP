@@ -1,0 +1,243 @@
+﻿@model IEnumerable<CaoDinhVu.Context.Order>
+
+@{
+    ViewBag.Title = "Tất cả đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+@section header{
+    <link href="~/Content/Admin/Template/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer{
+    <script src="~/Content/Admin/Template/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <strong class="text-danger text-uppercase">Tất cả sản phẩm</strong>
+                    @*<h1>@Session["Test"]</h1>*@
+                </div>
+                <div class="col-sm-6 text-right">
+                    <!--ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Blank Page</li>
+                    </ol-->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+
+            <div class="card-body my-2">
+                @*@Html.Partial("Message")*@
+                <table class="table table-bordered table-striped" id="myTable">
+                    <thead>
+                        <tr class="text-center">
+                            
+                            <th>
+                                Người đặt hàng
+                            </th>
+                            <th>
+                                Số điện thoại
+                            </th>
+                            <th>
+                                Ngày đặt hàng
+                            </th>
+                            <th>
+                                Ngày giao hàng
+                            </th>
+                            <th>
+                                Xác nhận
+                            </th>
+                            <th>
+                                Trạng thái
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @item.DeliveryName
+                            </td>
+                            <td>
+                                @item.DeliveryPhone
+                            </td>
+                            <td>
+                                @item.CreatedDate
+                            </td>
+                            <td>
+                                @item.ExportDate
+                            </td>
+                            <td>
+                                @if (item.Status == 1)
+                                {
+                                    <a href="@Url.Action("Status","Orders", new { id = item.Id})" class="btn btn-sm btn-success"><i class="fas fa-toggle-on"></i></a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Status","Orders", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-toggle-off"></i></a>
+                                }
+
+                            </td>
+                            @{
+                                if (@item.Status == 1)
+                                {
+                                    <td>Đang Giao</td>
+                                }
+                                else
+                                {
+                                    if (@item.Status == 2)
+                                    {
+                                        <td>Chờ xác nhận</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Đã giao</td>
+                                    }
+                                }
+
+
+                            }
+
+
+
+
+
+                            <td>
+                                <a href="@Url.Action("Details","Orders", new { id = item.Id })" class="btn btn-sm btn-info"><i class="fas fa-eye"></i> Chi tiết</a>
+                                <a href="@Url.Action("Edit","Orders", new { id = item.Id })" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Sữa</a>
+                                <a href="@Url.Action("Delete","Orders", new { id = item.Id })" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa</a>
+
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@*
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExportDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated_at)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated_by)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExportDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated_at)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated_by)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
+*@
